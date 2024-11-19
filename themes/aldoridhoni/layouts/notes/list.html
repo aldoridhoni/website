@@ -1,0 +1,29 @@
+{{ define "main" }}
+<div id="subtitle">
+    {{ .Content }}
+</div>
+<div id="tags">
+
+</div>
+<div id="list">
+    {{ range .Pages }}
+    <div class="meta">
+        <p>{{ .Date | time.Format ":date_medium" }}</p>
+        <p>
+            {{ with .GetTerms "tags" }}
+            {{ range . }}
+            <a class="label" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+            {{ end }}
+        </p>
+    </div>
+    <article>
+        <h3><a href="{{ .RelPermalink }}" title="{{ .Title }}">{{ .Title }}</a></h3>
+        {{ .Content }}
+        <p class="meta">
+            <a href="{{ .Permalink }}" title="Permalink for: {{ .Title }}" class="label">Permalink</a>
+        </p>
+    </article>
+    {{ end }}
+</div>
+{{ end }}

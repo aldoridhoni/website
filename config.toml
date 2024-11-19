@@ -1,0 +1,35 @@
+baseURL = 'https://aldoridhoni.com/'
+languageCode = 'en-us'
+title = 'Aldo Ridhoni'
+theme = 'aldoridhoni'
+sectionPagesMenu = 'main'
+[permalinks]
+  notes = "/notes/:title/"
+  post = "/blog/:year/:month/:slug/"
+[permalinks.section]
+  post = '/blog/'
+[menus]
+[[menus.top]]
+name = 'Home'
+pageRef = '/'
+weight = 1
+[[menus.top]]
+name = 'Notes'
+pageRef = '/notes'
+weight = 2
+[[menus.top]]
+name = 'Posts'
+pageRef = '/post'
+url = '/blog'
+weight = 3
+[[menus.top]]
+name = 'Reference'
+url = 'https://ref.aldoridhoni.com'
+weight = 4
+[[menus.top]]
+name = 'About'
+pageRef = '/about'
+weight = 6
+[markup.goldmark.renderer]
+unsafe = true # Allow HTML in md files
+canonifyURLs = true

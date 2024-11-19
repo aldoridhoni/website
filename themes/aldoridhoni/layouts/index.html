@@ -1,0 +1,52 @@
+{{ define "main" }}
+<div id="subtitle">
+    {{ .Title }}
+</div>
+<article>{{ .Content }}</article>
+<div id="list">
+    <h2>Notes</h2>
+    <article>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{- range ( where .Site.RegularPages "Type" "notes" | first 20 ) }}
+            <tr>
+                <td>{{ .Date | time.Format "2006-01-02" }}</td>
+                <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+            </tr>
+            {{- end}}
+            </tbody>
+        </table>
+    </article>
+
+    <h2>Blog Posts</h2>
+
+    <article>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Date</th>
+                <th>Title</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{- range ( where .Site.RegularPages "Type" "post" | first 30 ) }}
+            <tr>
+                <td>{{ .Date | time.Format "2006-01-02" }}</td>
+                <td><a href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+            </tr>
+            {{- end}}
+            </tbody>
+        </table>
+    </article>
+    <h2>Projects</h2>
+    <article>
+
+    </article>
+</div>
+{{ end }}

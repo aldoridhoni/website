@@ -1,0 +1,23 @@
+{{ define "main" }}
+
+{{ partial "inline/menu_recursive.html" . }}
+
+{{ end }}
+
+{{- define "partials/inline/menu_recursive.html" }}
+    {{ if or (.Sections) (.Pages) }}
+    {{ $child_pages := union .Sections .Pages }}
+    <ul class="submenu">
+        {{ range $child_pages.ByTitle }}
+        <li class="dropdown">
+            <a href="{{.Permalink}}"><div class="menu-text">{{ .Title }}</div>
+                {{ if or (.Sections) (.Pages) }}
+                <div class="right-arrow">▶</div>
+                {{ end }}
+            </a>
+            {{ partial "inline/menu_recursive.html" . }}
+        </li>
+        {{ end }}
+    </ul>
+    {{ end }}
+{{- end }}

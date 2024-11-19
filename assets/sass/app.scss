@@ -1,0 +1,10 @@
+// Example of project-name.scss
+@import "variables";
+
+// Import only the needed components
+
+@import "node_modules/spectre.css/src/spectre";
+
+@import "main";
+
+@import "pages";

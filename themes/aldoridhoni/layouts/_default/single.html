@@ -1,0 +1,31 @@
+{{ define "main" }}
+{{ $currentPage := . }}
+<div id="subtitle" class="post-title">
+    <h1>{{ .Title }}</h1>
+</div>
+<article>
+    <div class="meta">
+        <p>{{ .Date | time.Format ":date_medium" }}</p>
+        <p>
+            {{ with .GetTerms "tags" }}
+            {{ range . }}
+            <a class="label" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+            {{ end }}
+        </p>
+    </div>
+    {{ .Content }}
+</article>
+<div class="post-nav">
+    {{ if .Page.PrevInSection }}
+    <span class="previous">
+        <a href="{{ .Page.PrevInSection.RelPermalink }}">{{ .Page.PrevInSection.Title | truncate 50 "..." }}</a>
+    </span>
+    {{ end }}
+    {{ if .Page.NextInSection }}
+    <span class="next">
+        <a href="{{ .Page.NextInSection.RelPermalink }}">{{ .Page.NextInSection.Title | truncate 50 "..." }}</a>
+    </span>
+    {{ end }}
+</div>
+{{ end }}

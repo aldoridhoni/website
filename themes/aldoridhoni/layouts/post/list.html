@@ -1,0 +1,56 @@
+{{ define "main" }}
+<div id="subtitle">
+    {{ .Content }}
+</div>
+<div id="tags">
+
+</div>
+<div id="list">
+    {{ $pages := where .Site.RegularPages "Type" "post" }}
+    {{ $pages = $pages.ByPublishDate.Reverse }}
+
+    {{ range  (.Paginate $pages 7).Pages }}
+    <div class="meta">
+        <p>{{ .Date | time.Format ":date_medium" }}</p>
+        <p>
+            {{ with .GetTerms "tags" }}
+            {{ range . }}
+            <a class="label" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            {{ end }}
+            {{ end }}
+        </p>
+    </div>
+    <article>
+        <h3><a href="{{ .RelPermalink }}" title="Permalink for: {{ .Title }}">{{ .Title }}</a></h3>
+        {{ with .Resources.Get .Params.Cover }}
+        <img src="{{ (.Fill "200x200 q100 Center").RelPermalink }}" alt="Cover"><br>
+        {{ end }}
+        {{ .Summary }}
+
+        <p class="meta">
+            {{ if .Truncated }}
+            <a href="{{ .RelPermalink }}" class="label">More ...</a>
+            {{ else }}
+            <a href="{{ .Permalink }}" title="{{ .Title }}" class="label">Permalink</a>
+            {{ end }}
+        </p>
+    </article>
+    {{ end }}
+    <div class="paginator">
+        {{- with .Paginator }}
+          {{- $currentPageNumber := .PageNumber }}
+
+          {{- with .Prev }}
+        <span class="previous-page">
+            <a href="{{ .URL }}">Prev page</a>
+        </span>
+          {{- end }}
+        {{- with .Next }}
+        <span class="next-page">
+            <a href="{{ .URL }}">Next page</a>
+        </span>
+        {{- end }}
+        {{- end }}
+    </div>
+</div>
+{{ end }}
